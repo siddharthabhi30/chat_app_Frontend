@@ -1,0 +1,31 @@
+.messages{
+    
+  height: 90%;
+  background-color: rgb(179, 118, 27);
+  overflow-y: scroll;
+  
+}
+
+.my-message{
+  width: 100%;
+  margin-bottom: 2%;
+  height: auto;
+ overflow-x: hidden;
+
+}
+
+.container{
+  width: 100%;
+  background-color: rgb(104, 101, 76);
+  height: 100vh;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  
+}
+.input{
+  display: flex; 
+  justify-content: space-around; 
+  position: absolute; bottom: 2%; 
+  width: 100%;
+}
