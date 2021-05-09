@@ -1,37 +1,42 @@
+import EventEmitter from "events";
+import { IMessage } from "../interface/Message";
+
 export const io = require("socket.io-client");
 
 
-type callbackFunctionString=(data:string)=>void;
+type callbackFunctionString=(data:IMessage)=>void;
 
 
 type callbackFunctionBoolean=(data:boolean)=>void;
 
 
-function initilizeEvents(socket:any,cb1:callbackFunctionString,cb2:callbackFunctionBoolean){
+function initilizeEvents(socket:any,cb1:callbackFunctionString,cb2:callbackFunctionBoolean,messageEmitter:EventEmitter){
 
   socket.on("connect", () => {
     cb2(true)
   });
   socket.io.on("close", ()=>{
-    console.log("closing of socket is occuring")
+  //  console.log("closing of socket is occuring")
     cb2(false)
   });
 
-  socket.on('message',(data:string)=>{
+  socket.on('message',(data:IMessage)=>{
     console.log("some one is sending",data)
     cb1(data);
   })
 
   socket.on("connect_error", () => {
-    console.log("connection error occured")
+   // console.log("connection error occured")
     cb2(false);
   });
+ 
+  return socket;
   
 
 }
 
 
-export function intializeConnection(url:string,cb1:callbackFunctionString,cb2:callbackFunctionBoolean){
+export function intializeConnection(url:string,cb1:callbackFunctionString,cb2:callbackFunctionBoolean,messageEmitter:EventEmitter){
     const  socket = io(url, {
     withCredentials: true,
     extraHeaders: {
@@ -39,7 +44,11 @@ export function intializeConnection(url:string,cb1:callbackFunctionString,cb2:ca
     },
     reconnection: false
   });
-  initilizeEvents(socket,cb1,cb2);
+  console.log(messageEmitter);
+  messageEmitter.on('message',(data)=>{
+    socket.emit('message',data)
+  })
+  initilizeEvents(socket,cb1,cb2,messageEmitter);
 }
 
 // let  serverUrl:string="";

@@ -1,13 +1,13 @@
 import { IMessage } from "../interface/Message";
-import { IState } from "./GlobalState";
-const updateConnection='ADD_MESSAGE';
- 
+import { IState } from "./AppState";
+
 type Action =
     | AddMessageAction
     | UpdateConnectionAction
     | UpdateOldMessageAction
     | ClearMessageCachetAction
     |sendButtonDisabledAction
+    |UpdateMapAction
 
 
 interface AddMessageAction {
@@ -43,6 +43,7 @@ interface sendButtonDisabledAction {
 
      
         case 'ADD_MESSAGE':
+           
             return {
                 ...state,
                 messages:[...state.messages,action.payload],
@@ -59,6 +60,11 @@ interface sendButtonDisabledAction {
             return{
                 ...state,
                 sendButtonDisabled:action.payload
+            }
+        case 'UPDATE_MAP':
+            return{
+                ...state,
+               storedMessageMap:state.storedMessageMap.set(action.payload,"true")
             }
 
 
