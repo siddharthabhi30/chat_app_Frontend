@@ -7,6 +7,8 @@ type Action =
     | UpdateConnectionAction
     | UpdateOldMessageAction
     | ClearMessageCachetAction
+    |sendButtonDisabledAction
+
 
 interface AddMessageAction {
     type: 'ADD_MESSAGE';
@@ -30,8 +32,13 @@ interface UpdateMapAction {
     payload: string
 }
 
+interface sendButtonDisabledAction {
+    type: 'UPDATE_BUTTON'
+    payload: boolean
+}
 
- export const reducer= (state:IState,action:Action):IState=>{
+
+ export const AppReducer= (state:IState,action:Action):IState=>{
       switch(action.type){
 
      
@@ -46,6 +53,12 @@ interface UpdateMapAction {
             return{
                 ...state,
                 isConnected:action.payload
+            }
+        
+        case 'UPDATE_BUTTON':
+            return{
+                ...state,
+                sendButtonDisabled:action.payload
             }
 
 

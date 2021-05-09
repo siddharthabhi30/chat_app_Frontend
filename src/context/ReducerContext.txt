@@ -1,0 +1,27 @@
+// import { createContext, useReducer } from "react";
+// import { AppReducer } from "./AppReducer";
+
+
+// export interface IDummy {
+//    val:number
+//   }
+//     const defaultState: IDummy = {
+//    val:0
+// };
+// const ReducerContext = createContext<{state:IDummy,dispatch: React.Dispatch<any>}>(
+//     {
+//         state:defaultState,dispatch:()=>null
+//     });
+
+
+//     const ReducerProvider: React.FC = ({ children }) => {
+//         const [state, dispatch] = useReducer(AppReducer, defaultState);
+      
+//         return (
+//           <ReducerContext.Provider value={{state, dispatch}}>
+//             {children}
+//           </ReducerContext.Provider>
+//         )
+//       }
+      
+//       export { ReducerProvider };

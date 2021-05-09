@@ -26,6 +26,12 @@
 .input{
   display: flex; 
   justify-content: space-around; 
-  position: absolute; bottom: 2%; 
+  position: absolute; bottom: 4%; 
   width: 100%;
+}
+.green{
+  background-color: greenyellow;
+}
+.red{
+  background-color: red;
 }
